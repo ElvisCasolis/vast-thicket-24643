@@ -8,6 +8,7 @@ from postgis.psycopg import register
 import json
 import os
 from decimal import Decimal as D
+import pandas as pd
 
 app = Flask(__name__)
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -185,8 +186,8 @@ def statistics():
 	for row in cursor.fetchall():
 		results.append(dict(zip(columns,row)))
 
-
-	return jsonify(DecimalEncoder().encode(results[0]))
+		df=pd.read_json(DecimalEncoder().encode(results[0]),typ='series')
+	return jsonify(df)
 
 
 if __name__ == '__main__':
