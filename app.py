@@ -12,17 +12,14 @@ app = Flask(__name__)
 DATABASE_URL = os.environ['DATABASE_URL']
 
 
-user= 'postgres'
-pw= 'postgres'
-db= 'postgres'
-host= 'localhost'
+user= 'tjbguzmfqysfmi'
+pw= 'ec212d7962872b24c2ea09897186c914ae20e35c7d0f7c90e61eaecac7a41fb1'
+db= 'dft06nn603npvn'
+host= 'ec2-54-243-137-182.compute-1.amazonaws.com'
 port= '5432'
 
 
-#DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=user,pw=pw,url=host,db=db)
-
-
-DB_URL=DATABASE_URL
+DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=user,pw=pw,url=host,db=db)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
@@ -166,9 +163,8 @@ def statistics():
 	lat1 = request.args['lat']
 	lng1 = request.args['lng']
 	rad1= request.args['rad']
-	#conn_string = "host='localhost' dbname='postgres' user='postgres' password='postgres'"
-	#conn = psycopg2.connect(conn_string)
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+	conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
+	conn = psycopg2.connect(conn_string)
 	conn.set_isolation_level('ISOLATION_LEVEL_AUTOCOMMIT')
 	cursor = conn.cursor()
 	register(conn)
@@ -186,4 +182,4 @@ def statistics():
 
 
 if __name__ == '__main__':
-    app.run(debug=False,port=5000)
+    app.run()
