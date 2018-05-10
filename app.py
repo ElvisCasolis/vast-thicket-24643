@@ -186,7 +186,7 @@ def statistics():
 		results.append(dict(zip(columns,row)))
 
 
-	return jsonsify(jsonify(DecimalEncoder().encode(results[0])))
+	return jsonify(jsonify(DecimalEncoder().encode(results[0])))
 
 
 if __name__ == '__main__':
