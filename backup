@@ -1,0 +1,244 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.3
+-- Dumped by pg_dump version 10.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: tjbguzmfqysfmi
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry, geography, and raster spatial types and functions';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: tjbguzmfqysfmi
+--
+
+CREATE TABLE public.alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.alembic_version OWNER TO tjbguzmfqysfmi;
+
+--
+-- Name: restaurants; Type: TABLE; Schema: public; Owner: tjbguzmfqysfmi
+--
+
+CREATE TABLE public.restaurants (
+    id text NOT NULL,
+    rating integer,
+    name text,
+    site text,
+    email text,
+    phone text,
+    street text,
+    city text,
+    state text,
+    lat double precision,
+    lng double precision,
+    geom public.geometry(Point,4326)
+);
+
+
+ALTER TABLE public.restaurants OWNER TO tjbguzmfqysfmi;
+
+--
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: tjbguzmfqysfmi
+--
+
+COPY public.alembic_version (version_num) FROM stdin;
+434f8901db86
+\.
+
+
+--
+-- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: tjbguzmfqysfmi
+--
+
+COPY public.restaurants (id, rating, name, site, email, phone, street, city, state, lat, lng, geom) FROM stdin;
+851f799f-0852-439e-b9b2-df92c43e7672	1	Barajas, Bahena and Kano	https://federico.com	Anita_Mata71@hotmail.com	534 814 204	82247 Mariano Entrada	Mrida Alfredotown	Durango	19.44005705	-99.127047099999999	0101000020E61000004EE3288A21C858C0CE1F2E94A7703340
+4e17896d-a26f-44ae-a8a4-5fbd5cde79b0	0	Hernndez - Lira	http://graciela.com.mx	Brandon_Vigil@hotmail.com	570 746 998	93725 Erick Arroyo	Mateofurt	Hidalgo	19.437904280000001	-99.128657680000003	0101000020E6100000ACFE6BED3BC858C0E160B17E1A703340
+c0ffd058-e773-47f1-974b-42d41cb555bf	3	Rendn - Elizondo	https://cristina.mx	Hugo.Casanova49@gmail.com	5866-337-812	5518 Monserrat Explanada	Chignahuapan Mara	Sinaloa	19.43607059	-99.129786569999993	0101000020E61000000A67546C4EC858C024CC7A52A26F3340
+c29082c4-4352-4517-9b4b-c45f86fc1830	2	Njera - Chvez	https://pedro.gob.mx	Carlota31@hotmail.com	5532-129-406	79224 Mariano Travesa	Nezahualcyotl Timoteo	Coahuila	19.44248691	-99.123833259999998	0101000020E6100000DA7656E2ECC758C0AC5B77D246713340
+2b8f5a44-1e8b-44ec-9b25-0edc5b64b7e6	3	Hurtado, Roln and Segovia	https://elas.org	RosaMara_Figueroa@corpfolder.com	559.867.074	039 Susana Polgono	Marco Antonioland	Colima	19.43349766	-99.128513510000005	0101000020E6100000D4A2BA9039C858C0B097E0B3F96E3340
+ddb77425-2c3f-435c-8391-021b40010b0d	0	Serrato Hermanos	https://octavio.org	Yamileth_Lugo28@corpfolder.com	571.744.718	14476 Delgadillo Partida	Nevrezfort	Michoacan	19.434704230000001	-99.126381780000003	0101000020E610000042FA9AA316C858C06A48C3C6486F3340
+073aa6dc-3363-417c-b3f4-eba74fb75de8	3	Palacios, Moreno and Bustamante	http://bernardo.mx	Luis.Anaya25@corpfolder.com	581 978 966	37097 Florencia Senda	Octavioville	Chiapas	19.434565719999998	-99.132424850000007	0101000020E610000060FB13A679C858C0D95CF3B23F6F3340
+7b845a5f-94d4-4d52-bbb7-838839a180d6	1	Saiz, Aponte and Muoz	https://homero.com	Carolina_Merino@nearbpo.com	584212054	563 Verduzco Va Pblica	Nuevo Laredo Alejandrahaven	San Luis Potos	19.441487819999999	-99.127489929999996	0101000020E6100000D6FA85CB28C858C07A7B845805713340
+030eaf75-da6e-4748-9727-f2704f831498	2	Nio - Negrete	https://elizabeth.gob.mx	Luz_Sevilla@gmail.com	5178-668-409	3041 Gael Torrente	Quertaro Saratown	Oaxaca	19.441681469999999	-99.126573239999999	0101000020E61000005296A5C619C858C032E66C0912713340
+1ce4a7f8-ff21-4450-9107-f4f952f39f99	4	Kortajarena - Rangel	http://dbora.gob.mx	Brandon_Quiros@gmail.com	560 092 151	59897 Esquivel Aldea	Monterrey Dulce Mara	Quertaro	19.440701969999999	-99.126014929999997	0101000020E610000018CAECA010C858C0CA6E24D8D1703340
+9f98fad3-ecd6-421b-ba8c-2bd63340473d	2	Macas S.L.	http://miguel.com.mx	Jazmin_Santiago7@yahoo.com	508272671	1736 Adela Urbanizacin	Puerto Vallarta Dorotea	Baja California Sur	19.436925779999999	-99.131560750000006	0101000020E6100000FCABC77D6BC858C019E12F5EDA6F3340
+38c965f9-74b0-4d8e-9cc2-2e457a1ebb83	3	Arreola Hermanos	https://alejandra.com.mx	Ximena_Domnquez62@yahoo.com	531.757.355	9061 Fernando Puente	Campeche Mercedes	Guanajuato	19.434988820000001	-99.126307350000005	0101000020E6100000A55F6C6B15C858C09006646D5B6F3340
+4501fb34-eefe-4f63-90c9-a9a1272df71d	0	Gallardo - Angulo	https://jos antonio.mx	Brandon34@gmail.com	5191-333-084	7229 Villarreal Gran Subida	Campeche Daniela	Quintana Roo	19.434132030000001	-99.132623559999999	0101000020E6100000433887E77CC858C000FFD646236F3340
+d04fd5aa-4a56-43a6-91c9-35edaaadadc9	0	Calvillo S.L.	https://martn.info	JuanPablo.Cervntez@nearbpo.com	501 812 092	38836 Emilio Partida	Rubnchester	Tabasco	19.442393169999999	-99.126576979999996	0101000020E6100000B16155D619C858C0AF1FC5AD40713340
+a850ff07-516e-44e4-acd7-26fa0c12f4fc	1	Palomo - Cardona	http://marco antonio.org	Lizbeth.Laboy@hotmail.com	508.505.560	5588 Leticia Torrente	Tetela de Ocampo Silviafurt	Colima	19.434869859999999	-99.128089520000003	0101000020E610000010D7629E32C858C052B792A1536F3340
+7173d827-3308-46d8-9b9e-86306ec64f78	3	Carren e Hijos	http://dolores.org	Benjamn.Arenas27@yahoo.com	572.204.703	7124 Granado Parcela	Celaya Carlos	Puebla	19.44055436	-99.126803469999999	0101000020E6100000D62A4D8C1DC858C06A4FA82BC8703340
+d6782cfc-29ef-4241-985b-0a6ff6cf4c64	4	Mungua S.L.	https://emmanuel.com.mx	Yaretzi_Saldivar28@yahoo.com	573.429.070	05203 Martn Lado	Len Csarland	Guerrero	19.438892039999999	-99.130334270000006	0101000020E6100000ADCC8C6557C858C054468E3A5B703340
+dd56e1e9-bd67-41cd-baac-a8f9f47ad5c8	4	Fuentes, Porras and Barajas	http://ariadna.com.mx	Jimena25@hotmail.com	5087-469-378	81414 Luz Ferrocarril	Paolabury	Michoacan	19.439351179999999	-99.133066130000003	0101000020E61000008A23CD2784C858C01B8FA55179703340
+ac3bafbe-ea67-47cb-af99-63d945f71bf5	1	Ledesma, Vlez and Matas	https://miranda.mx	Amalia27@gmail.com	593 520 541	7630 Collado Huerta	Irapuato Carolina	Jalisco	19.44271475	-99.12725417	0101000020E61000007F9BACEE24C858C0F2B4FCC055713340
+3e26a92c-defb-4475-8c23-450750556fb9	4	Galarza, Griego and Orozco	https://jos luis.com.mx	JosEduardo_Narvez@nearbpo.com	5177-114-746	0785 Jos Luis Mercado	Tampico-Pnuco Mercedes	Guerrero	19.435311810000002	-99.130917400000001	0101000020E61000008DDE5FF360C858C038834398706F3340
+6b7cd221-7859-4ece-8ed6-fd79283f0e65	2	Hurtado, Armijo and Soto	https://iker.org	Patricio.Alonso52@gmail.com	5234-475-063	830 Valentn Colonia	La Laguna Ana Maramouth	Tabasco	19.433433879999999	-99.130447250000003	0101000020E61000009A266C3F59C858C01194D385F56E3340
+d7888ed4-52f0-4be8-a210-f0d28ce0e565	0	Paredes - Montero	http://abraham.com.mx	Vanessa_Quinterodelacruz84@hotmail.com	5783-052-043	237 Regina Jardines	Pilarshire	Nuevo Len	19.439240179999999	-99.133190440000007	0101000020E610000027FC313186C858C06C30600B72703340
+e6c4bf95-dba4-44b5-af90-b0ab7214146e	0	Zavala - Chavarra	https://ignacio.mx	Jernimo_Armas@nearbpo.com	588078464	019 Aragn Urbanizacin	Carrasquillobury	Yucatn	19.433240300000001	-99.132294239999993	0101000020E6100000F28F428277C858C02ACF17D6E86E3340
+1d7e6cac-013e-404b-8d93-19d838ef30e1	1	Padilla, Mata and Posada	https://gabriel.com.mx	Josefina_Cano@corpfolder.com	554 352 295	0658 Espino Conjunto	Mrida Emilio	Guerrero	19.439150269999999	-99.124131539999993	0101000020E6100000EF2C6AC5F1C758C0F8ADEF266C703340
+811fa2fc-f29c-4152-a821-7c2a67ab5d21	4	Gallegos, Anguiano and Jurado	http://eduardo.com	Carla.Ramn81@corpfolder.com	5572-745-754	2179 Jos Plaza	Sofiaville	Durango	19.434062619999999	-99.123802580000003	0101000020E6100000AB10A861ECC758C0EA5055BA1E6F3340
+6e658154-be6f-409c-9c38-b53cc38c2705	3	Figueroa e Hijos	http://mara cristina.org	FernandoJavier.Batista@nearbpo.com	576.091.302	166 Gaona Ferrocarril	Tetela de Ocampo Ester	Yucatn	19.434163040000001	-99.130697839999996	0101000020E61000004D1D795A5DC858C094EE194F256F3340
+40424cd9-a4ff-466f-bea9-51cacb2dd2d5	3	Cruz, Korta hernandez and Yez	http://pedro.info	Jorge.Carrion@gmail.com	551 482 751	684 Barrientos Monte	Orizaba Nataliahaven	Estado de Mxico	19.442036609999999	-99.132756069999999	0101000020E6100000B6BF50137FC858C0AF95AF4F29713340
+ed23040e-6d68-4211-b31c-62e2f36d120a	3	Casanova - Jaramillo	http://brayan.com	Valentina_Gracia59@nearbpo.com	573.342.065	220 ngel Gabriel Solar	Cancn Yaretzi	Durango	19.433809979999999	-99.129344579999994	0101000020E6100000F3407D2E47C858C046C7BC2B0E6F3340
+8e086874-60ff-44d5-a327-e4bccf3a90ed	2	Moya - Cepeda	https://claudia.info	Silvia20@hotmail.com	592.612.849	28658 Jos Antonio Aldea	Guardadoview	Chihuahua	19.441974590000001	-99.132105719999998	0101000020E6100000EEC08C6B74C858C088B6293F25713340
+5675b76e-738a-4f6f-9adc-2a1b708b67fc	1	Yanes S.A.	http://rubn.info	MaraLuisa_Amador@nearbpo.com	555 572 993	358 Mara Soledad Arrabal	Tlalnepantla Cristobal	Baja California Sur	19.439235499999999	-99.128932599999999	0101000020E6100000D918856E40C858C001BEDBBC71703340
+c4965d5d-4c08-4806-8cfc-77099379ce4e	1	Rael, Mota and Cintrn	https://francisco.org	Miguelngel4@corpfolder.com	511.280.590	821 Lorena Ramal	Tula Adnville	Chihuahua	19.44159823	-99.126352089999997	0101000020E61000003395132716C858C04DD2E3940C713340
+da7c9bad-6036-4a3a-8873-81dfaa585b26	0	Hinojosa Hermanos	https://erick.mx	XimenaGuadalupe.Mireles@nearbpo.com	5382-692-003	8772 Marrero Huerta	Zaragozafort	Morelos	19.437109459999999	-99.129257260000003	0101000020E61000001E1E3EC045C858C0E378D367E66F3340
+71795f1c-4ca0-4ec7-b925-5b906711329b	3	Zamudio S.L.	http://cecilia.com.mx	Estela.Quinta80@hotmail.com	590.101.852	928 Benavdez Municipio	Terrazasside	Baja California Sur	19.43654561	-99.125591459999995	0101000020E6100000D756C3B009C858C09129FE73C16F3340
+556091ed-3047-4f07-a2e3-1abbb37ff1bd	4	Kamat S.L.	http://melissa.mx	Eva88@corpfolder.com	5756-043-582	4820 Gurule Rambla	Len Kimberlyland	Aguascalientes	19.440250259999999	-99.129177459999994	0101000020E61000002485897144C858C068C1B43DB4703340
+87b35453-f063-461a-b17b-9173f7f09805	0	Arevalo - Resndez	http://esteban.info	Valeria.Espinal@yahoo.com	560 091 544	481 Raquel Huerta	Roshaven	Guanajuato	19.436266289999999	-99.132942799999995	0101000020E6100000468F842282C858C0B2E5C725AF6F3340
+8d567e51-e73c-47b3-ad15-9ca14c32da14	0	?aez S.L.	http://cristobal.mx	Eduardo_Montes75@nearbpo.com	506.416.955	705 Gloria Avenida	Armijomouth	Tabasco	19.43480314	-99.124848909999997	0101000020E61000000A594886FDC758C0847F32424F6F3340
+84314586-29fb-420f-95e5-f15fbe7a619c	0	Mayorga S.L.	https://eva.com.mx	Melissa51@corpfolder.com	521.791.308	4152 Karem Mercado	Coatzacoalcos Nicolsstad	Baja California Norte	19.43966503	-99.132421590000007	0101000020E61000006695679879C858C07C0B2DE38D703340
+1b413a3a-e894-4142-a954-37176f12003b	1	Bez, Karan and Armijo	https://fernando.info	Alexa.Ortega@yahoo.com	545520700	08030 Juan Manuel Torrente	Uruapan del Progreso Juan Pabloland	Tabasco	19.433699570000002	-99.131092109999997	0101000020E6100000AC4D29D063C858C074705DEF066F3340
+15c7fea0-89e8-4539-8632-46a619ef4ce9	1	Garca e Hijos	http://victor manuel.gob.mx	JosEmilio31@corpfolder.com	5250-478-668	3239 Apodaca Parque	Campeche Ramiroborough	Puebla	19.432912519999999	-99.131207919999994	0101000020E61000001358E7B565C858C0CF6DDB5AD36E3340
+36d43234-edd6-4680-8054-f2f6e4e4ab47	3	Polanco - Rodrguez	http://paola.gob.mx	Mayte.Camacho@nearbpo.com	5778-085-952	31916 Daniel Glorieta	Zitacuaro Monserratchester	Sinaloa	19.434522269999999	-99.126840090000002	0101000020E6100000CA97E5251EC858C09F08FBD93C6F3340
+7b97ebd0-6c61-43b1-80c6-bdc88846c727	3	Aragn, Robles and Echevarra	https://mario.org	MaradeJess32@gmail.com	558.191.752	5983 Tapia Lado	Juanaborough	Baja California Sur	19.436954119999999	-99.130072069999997	0101000020E610000079B1CD1953C858C0A140A739DC6F3340
+58c0549f-4b2c-43d4-af8d-d4641ffa9f66	4	Zabaleta S.A.	http://sofia.com	Bernardo.Yebra48@hotmail.com	538173475	65562 Olivas Rincn	Durango Elizabethchester	Campeche	19.43531029	-99.129204380000004	0101000020E610000066A672E244C858C08B29C37E706F3340
+5dccd552-2941-485c-a80d-8a769f4df5c5	0	Pelayo, Puente and Echevarra	https://homero.gob.mx	Eva.Ferrer47@hotmail.com	568360596	96024 Ana Sofa Polgono	Chetumal Liliafort	Tlaxcala	19.440702999999999	-99.127480689999999	0101000020E6100000FA9AC4A428C858C0C43F6CE9D1703340
+6308a2f2-6719-4ff6-818e-4e62f41a5296	4	Bentez - Carbajal	https://jaime.com.mx	Eva_Faras11@corpfolder.com	566384264	795 Gaytn Colonia	Nicolsview	Durango	19.439286259999999	-99.131524040000002	0101000020E6100000059CCEE36AC858C03B48781075703340
+72cc52c1-7aa5-4098-a391-5a713e2d9781	0	Lozada, Chvez and Guerrero	https://estefana.mx	Victoria.Valadez@corpfolder.com	567 287 108	66998 Tejada Colegio	Isabelbury	Oaxaca	19.438667689999999	-99.125837689999997	0101000020E6100000DEC986B90DC858C0A35C96864C703340
+601c7236-e03c-4ba1-beb5-38fbc09108f9	1	Mesa e Hijos	http://sofia.org	Julia_Chavarra@nearbpo.com	565 772 068	6236 Axel Masa	Francisco Javierland	Baja California Sur	19.433213550000001	-99.131724340000005	0101000020E6100000C818ED2B6EC858C01F6F4D15E76E3340
+3e21e0c4-3f89-42fb-8676-8350b95883e2	3	Muoz, Armendriz and Moya	https://abraham.com.mx	Emilio.Kortahernandez@nearbpo.com	500 103 302	626 Adriana Ramal	Rochaport	Veracruz	19.434724370000001	-99.124112030000006	0101000020E6100000F9789573F1C758C099ECA7184A6F3340
+8b8af894-bc42-4664-b08c-6cf4ef28081f	3	Delgadillo - Escobar	http://cristian.mx	JosLuis.Valds86@yahoo.com	5325-988-654	73621 Gloria Colegio	Delgadilloshire	Michoacan	19.434993410000001	-99.131723280000003	0101000020E610000033EE7A276EC858C0EFEC65BA5B6F3340
+0b9447e8-6253-4337-b9a0-d6573149fde0	1	Palomino - Vargas	http://abigail.mx	Cecilia_Zabaleta76@nearbpo.com	566.689.802	396 Abreu Bloque	Kortajarenaside	Quintana Roo	19.43447205	-99.131778629999999	0101000020E6100000598AA20F6FC858C0ADC66D8F396F3340
+cc9c245d-8b02-44c3-868e-90a3149edd5b	2	Vallejo, Jimnez and Jaimes	https://alfredo.gob.mx	Ramn_Campos@nearbpo.com	534 642 223	9775 Amaya Cuesta	Valle de Mxico Juanborough	Tlaxcala	19.43565765	-99.125283199999998	0101000020E61000003FAFD3A304C858C091007F42876F3340
+b6c3a6d0-4082-4353-926a-b903132b29f4	4	Ramn Hermanos	http://gloria.gob.mx	Abril.Yez@yahoo.com	526.705.438	41601 Lucia Manzana	Vallechester	Quintana Roo	19.4373486	-99.127895980000005	0101000020E6100000F4D89E722FC858C08EF3ED13F66F3340
+32084e1d-41b9-4dc8-9b8a-83b5003302c1	2	Senz - Romo	https://juan.gob.mx	Pablo_Alicea@yahoo.com	523671866	65816 Sergio Parque	Becerraport	Sonora	19.439706770000001	-99.129442170000004	0101000020E6100000E4B7CFC748C858C0D4FA749F90703340
+5b04ad6d-54c1-419c-b8cd-69090fee4e76	0	Ramos S.L.	https://matas.gob.mx	Daniela_Castillo26@yahoo.com	565166901	919 Salvador Colonia	ngel Gabrielfurt	Chiapas	19.432854649999999	-99.133443549999996	0101000020E61000002DC7D0568AC858C0E9ABF58FCF6E3340
+fdc12e77-af11-496a-846b-94068dcded56	2	Aragn, Herrera and Cortez	https://camila.com.mx	Victoria14@hotmail.com	5359-320-036	18089 Ramrez Partida	Los Mochis Carlachester	Jalisco	19.437309599999999	-99.131686740000006	0101000020E61000007B67388E6DC858C0123A9E85F36F3340
+39292d20-d201-4f0f-91a2-58e0f38fb2a2	0	Carrillo - Ozuna	https://carlos.mx	Armando82@yahoo.com	515577461	18190 Villagmez Ronda	Reynosa-Ro Bravo Sofia	Colima	19.442636400000001	-99.128219450000003	0101000020E6100000831D5ABF34C858C0E9047E9E50713340
+84572f5a-ea3d-4800-930c-5799a897b06c	1	Khalid - Corts	https://rosa mara.mx	Alan.Escobar@corpfolder.com	5191-038-970	225 Corts Masa	Ixtapaluca Mara de Jessmouth	Veracruz	19.438703050000001	-99.126659470000007	0101000020E61000003D5852301BC858C0CC67D4D74E703340
+3765054a-c706-4dcd-8424-aa8db4e5a4bd	4	Casrez S.L.	https://julio csar.gob.mx	Isaac86@gmail.com	567057696	808 Noriega Pasaje	La Paz Lucasbury	Jalisco	19.435477299999999	-99.125745550000005	0101000020E6100000863710370CC858C07FA6B9707B6F3340
+beef488c-7f32-4a35-8469-89f5c6277972	4	Cordero, Chapa and Lomeli	https://erick.org	Elisa.Orozco1@gmail.com	577 596 369	70658 Arredondo Extrarradio	Torren Tadeochester	Veracruz	19.441285109999999	-99.130854990000003	0101000020E610000061A49BED5FC858C069A99B0FF8703340
+fe82f695-e437-4f42-9a69-d3a451c4a1d0	0	Jaramillo - Narvez	https://ral.org	scar_Olivo@yahoo.com	591 730 248	0112 Jaime Apartamento	Comitn de Dominguez Gregorio	Jalisco	19.44030163	-99.12623585	0101000020E61000004CD5873F14C858C0BA398D9BB7703340
+b464014b-44ca-43e3-ba27-7477c8af2a53	0	Carrero Hermanos	http://luz.info	Adn.valos@corpfolder.com	562 179 920	7383 Hinojosa Huerta	Carlahaven	Hidalgo	19.433136409999999	-99.123920609999999	0101000020E610000006D0B550EEC758C027A81B07E26E3340
+8e5f2c9c-7a25-4cc0-a4fa-306c1a6e2d91	2	Sedillo - Mrquez	https://mara teresa.org	DulceMara98@nearbpo.com	5452-478-262	4279 Tadeo Parcela	Lozanoshire	Chiapas	19.43451065	-99.133588669999995	0101000020E610000008317EB78CC858C0828307173C6F3340
+83967700-00d9-4d8e-8b5d-dd72f4fba3e5	0	Bueno, Crespo and Rodrgez	https://gonzalo.com	Toms.Sols@gmail.com	5578-929-369	6347 Reina Salida	Roybalfort	Zacatecas	19.441412379999999	-99.128545669999994	0101000020E6100000502C9E173AC858C04726D86600713340
+650156a1-081b-4760-b438-0cee445be58e	3	Reyna S.A.	https://soledad.gob.mx	XimenaGuadalupe.Alaniz@nearbpo.com	518 264 968	895 Xenia Prolongacin	Mazatln Antoniamouth	Morelos	19.439138150000002	-99.133192980000004	0101000020E6100000094AD93B86C858C00BAD985B6B703340
+b2ca0188-62c0-4bba-b20c-62bc2d4ba192	4	Rubio S.A.	http://vctor.info	Hugo.Casrez2@hotmail.com	5471-253-103	119 Polanco Colegio	Vicentechester	Morelos	19.436442450000001	-99.126458150000005	0101000020E610000003A4ECE317C858C00C5641B1BA6F3340
+cb0e214f-b0e4-496a-8164-eac6105b2d35	0	Valles, Tamez and Duarte	https://marta.com	Anita_Crdova@gmail.com	574 635 517	16737 Garrido Rampa	Piedras Negras Martaport	Campeche	19.43363497	-99.133191980000007	0101000020E6100000218CA73786C858C04C8D8EB3026F3340
+b8b03b3d-4c06-4d91-b895-5d8dc85cbb2e	2	Venegas S.L.	http://mara guadalupe.com.mx	Dbora.Delgado66@gmail.com	5810-547-684	776 Burgos Plaza	Karantown	Quintana Roo	19.4414354	-99.133011420000003	0101000020E610000040B9544283C858C0F34B0EE901713340
+9e71243d-3b46-45de-9f1f-019b1bfe6bac	1	Romo, Olmos and Caldern	https://valeria.gob.mx	Emilio29@corpfolder.com	510.186.181	67576 Cabn Chalet	Nicolsfurt	Jalisco	19.440954519999998	-99.124616990000007	0101000020E6100000DD248AB9F9C758C0626C3A65E2703340
+59cddeed-fbea-425f-8181-4bd1354b4dfe	1	Arias S.L.	https://alejandro.com.mx	Axel.Zavala60@hotmail.com	537 651 378	739 Ortiz Manzana	Abrahamfurt	Baja California Norte	19.433120070000001	-99.127849280000007	0101000020E6100000B31ABFAE2EC858C028E4F7F4E06E3340
+39be48e9-ec92-4ce5-8c90-768dfe20fc37	1	Almaraz, Narvez and Uras	https://sebastian.com.mx	Lola32@nearbpo.com	500 100 614	684 Roln Apartamento	Karanmouth	Oaxaca	19.440398340000002	-99.131173779999997	0101000020E610000055CCB52665C858C0408313F2BD703340
+80537b08-6bae-444b-9564-98731e680f59	0	Alaniz - Aponte	https://ariadna.com.mx	Mara26@corpfolder.com	524.823.622	750 Alberto Escalinata	Tehuantepec-Salina Cruz Mauriciostad	Hidalgo	19.432885110000001	-99.126439180000006	0101000020E61000001EC25B9417C858C01860FE8ED16E3340
+714ce590-f302-4453-895b-aa2992c2fa2c	1	Armendriz S.A.	https://eloisa.org	Regina35@yahoo.com	542 891 822	821 Agustn Quinta	Piedras Negras Jessberg	Chiapas	19.436551290000001	-99.133023289999997	0101000020E6100000010A1E7483C858C09D9349D3C16F3340
+ecbdb52a-4263-4bf1-87fb-8d9d809ea6aa	4	Soliz Hermanos	http://roberto.gob.mx	Mercedes_Lugo@hotmail.com	537 295 998	440 Ceballos Huerta	Oaxaca Sara	Aguascalientes	19.435020309999999	-99.127219640000007	0101000020E61000005F4DD85D24C858C0B88BB47D5D6F3340
+596081be-67c8-4c47-8c56-e2611cd4fa32	2	Olivo, Santana and Elizondo	http://victor manuel.gob.mx	Emmanuel_Rosas56@nearbpo.com	545.851.405	4409 Jos Luis Rampa	Elizabethtown	Durango	19.434957109999999	-99.127354249999996	0101000020E61000006CB0709226C858C0D89C6259596F3340
+8a5aefe2-8d0c-45b6-aab2-4da2769e10fa	4	Vzquez, Espinal and Cervntez	http://mariana.gob.mx	Leticia.Hidalgo@nearbpo.com	528679468	055 Julio Lugar	Zacatlan Jos Emilioside	Guanajuato	19.43841681	-99.127596990000001	0101000020E61000008EC7908C2AC858C076F784153C703340
+c9186202-30a4-48e7-b20b-c56d733fa76a	1	Viera S.L.	http://ximena.gob.mx	Benjamn26@yahoo.com	518272168	675 Kamal Chalet	Guanajuato Tadeoview	Estado de Mxico	19.442273650000001	-99.129352019999999	0101000020E610000094E4B14D47C858C0EFA18ED838713340
+32b74fb4-1911-4db9-9646-f5ce4663ff1c	0	Alicea - Castaeda	https://gustavo.org	Gerardo_Ozuna32@yahoo.com	599 747 935	5702 Yamileth Terrenos	Coronadoview	Zacatecas	19.439496210000001	-99.126443089999995	0101000020E6100000BB16C2A417C858C07CAAD8D282703340
+e5f21255-2dde-469e-bff8-4ea81d6fca27	3	Medrano - Chavarra	http://julia.org	Kevin.Longoria68@nearbpo.com	568061069	0302 guilar Terrenos	Ocotln Maricarmenstad	Tabasco	19.43684	-99.127830230000001	0101000020E61000009252D85E2EC858C0AB9509BFD46F3340
+3b84c87a-1cf9-40e8-81ff-19669240ce9b	2	Naranjo, Galarza and guilar	https://juan pablo.com	Monserrat.Lozano77@corpfolder.com	588438707	9390 Manuel Sector	Cuernavaca Aliciachester	Puebla	19.435316749999998	-99.133038869999993	0101000020E6100000CBEF76B583C858C0A8A624EB706F3340
+d3df42be-c6ff-43f6-8226-066140ab1b01	0	Kanzaki e Hijos	http://ivanna.info	Eva_Guerra48@gmail.com	5487-547-323	8465 Jorge Luis Aldea	Saizside	Quertaro	19.434062390000001	-99.129004350000002	0101000020E6100000AC12769B41C858C03E7979B61E6F3340
+35b9efad-5168-419e-96bc-0535e5e5d2f9	1	Villarreal - Gaytn	http://yolanda.info	Camila.Castellanos@corpfolder.com	5344-687-599	00698 Vallejo Ferrocarril	Arriagabury	Veracruz	19.437130020000001	-99.128580310000004	0101000020E61000000397E8A83AC858C0F5FFC3C0E76F3340
+9c6f0247-d128-4396-b80c-8f9648928ec0	4	Salcedo Hermanos	https://marco antonio.org	Victoria.Lucero@corpfolder.com	573 413 844	7688 Puga Entrada	Gonzaloborough	Sinaloa	19.440695560000002	-99.132115900000002	0101000020E610000006723F9674C858C042B1996CD1703340
+937518f0-a27f-491e-8788-ae9be0c65b31	2	Gonzales, Valladares and Espinal	https://carlota.org	Dolores.Mercado64@corpfolder.com	5528-685-947	30474 Montez Mercado	Jos Luisstad	Sinaloa	19.437307050000001	-99.128091119999993	0101000020E6100000B6D318A532C858C06C0FD65AF36F3340
+534d5669-c0d4-4fe1-805e-7f836eb80e0f	1	Zayas - Loya	https://javier.com	Teresa_Miramontes@nearbpo.com	523.743.315	9119 Lorenzo Riera	Tulancingo Zoe	Tlaxcala	19.440962150000001	-99.125705269999997	0101000020E61000006EE51D8E0BC858C01B063DE5E2703340
+72bd30eb-192f-4f5a-bda2-bde3ae0844c2	1	Huerta e Hijos	https://esteban.com.mx	Gloria_Robledo73@nearbpo.com	509.051.989	93160 Xairo Belmonte Va	Ciudad Obregn Emmanuel	Zacatecas	19.43910022	-99.12469917	0101000020E6100000413F3A12FBC758C000913CDF68703340
+5e238917-a1e1-408a-93d5-0c1bcb3361bc	0	Carranza e Hijos	http://diana.org	Teresa_Domnquez39@corpfolder.com	545.204.593	19099 Isabel Bloque	Tlaxcala-Apizaco Juan Manuel	Sinaloa	19.439734810000001	-99.132349289999993	0101000020E6100000B90C286978C858C0DFDCE37592703340
+4e20f081-3095-4918-88f8-9591991b017f	4	Vlez - Maldonado	http://jos eduardo.org	Diego16@gmail.com	516.205.131	5206 Jurez Salida	Manuelaburgh	Puebla	19.437768500000001	-99.128648659999996	0101000020E6100000F3D796C73BC858C00FB8AE9811703340
+74c9182c-9ec1-47cb-8271-50729ae7f95d	3	Sols, Valles and Collado	http://mariana.com	Mario_Arreola51@gmail.com	5917-337-221	638 Sedillo Urbanizacin	Concepcinside	Quintana Roo	19.441102820000001	-99.129289439999994	0101000020E61000002921374746C858C0C9124A1DEC703340
+19e1837a-c9ad-49d8-8d6d-7cb1d2ee0700	0	guilar - Matos	https://eloisa.com.mx	LuisMiguel.Godnez83@yahoo.com	5616-561-563	319 Dolores Rampa	Coatzacoalcos Gonzalo	Oaxaca	19.4371495	-99.126510429999996	0101000020E6100000FCDC33BF18C858C077F69507E96F3340
+6589e471-ae41-4e6b-83b8-9654d6fc71ea	1	Peres, Meraz and Pea	http://esteban.com.mx	Luisngel.Gmez50@nearbpo.com	581 479 974	134 Hidalgo Avenida	Ojo de agua Luis ngelport	Campeche	19.43293297	-99.131292099999996	0101000020E610000048EEFA1667C858C09982F3B1D46E3340
+58131b8b-1b93-495f-b7a1-0e2e1b93633d	2	Meraz e Hijos	http://ximena.gob.mx	Isabela.Briones11@gmail.com	5495-151-485	10411 Pagan Salida	Ciudad de Mxico Carlota	Aguascalientes	19.43868243	-99.128911400000007	0101000020E610000039C5991540C858C0082EE27D4D703340
+097f66dd-ca33-4f30-88e4-33193fcf8cda	1	Briseo - Rodarte	https://fernando javier.com	Mario84@yahoo.com	5256-976-186	780 Medina Terrenos	Madridland	Sonora	19.433857280000002	-99.125427380000005	0101000020E6100000DFC78F0007C858C045BB4C45116F3340
+fcb9b113-49f5-4119-8016-c7357ac135fc	0	Briones S.A.	http://mara de jess.com	Emilio_Abeyta@yahoo.com	539 404 967	375 Puente Puente	Tulancingo de Bravo Margarita	Zacatecas	19.439758470000001	-99.126119840000001	0101000020E6100000500BF35812C858C0FCC9D60294703340
+0c91a515-2be1-4e8b-a4b0-be4f0ed1cce1	0	Pedroza, Heredia and Lebrn	https://zoe.com	Teodoro_Zelaya@gmail.com	5932-627-483	69201 Dvila Edificio	Julioview	Baja California Norte	19.43386838	-99.126575919999993	0101000020E61000001C37E3D119C858C056DE86FF116F3340
+7ef3ed97-ebd6-4114-b2c1-af664534df79	1	Jquez, Jimnez and Yami	http://dulce mara.org	Ivan_Delro32@gmail.com	555522401	057 Melndez Aldea	Zacatlan Claudia	Baja California Sur	19.441782709999998	-99.129551829999997	0101000020E61000002A3FC2934AC858C06463F3AB18713340
+3eb803d7-445a-43cd-9d08-2c3bd1c56148	1	Esquivel S.L.	https://abigail.com	Norma40@corpfolder.com	552972577	66678 Andrs Salida	Zacatlan Berta	Baja California Sur	19.438093120000001	-99.133411089999996	0101000020E6100000511EABCE89C858C0AB00E7DE26703340
+24345eda-0451-4225-a6d0-17365f746afc	3	Jaramillo - Flores	http://jos antonio.com.mx	Patricia.Noriega75@yahoo.com	520.411.112	2399 Esquibel Partida	Culiacn Cristianport	Chihuahua	19.441996719999999	-99.124306419999996	0101000020E61000004D25EAA2F4C758C0DA5671B226713340
+1ce2e219-d0e5-4f88-85f9-c152485ec7ab	0	Matos S.L.	https://ricardo.info	JosEmilio.Cotto69@corpfolder.com	5502-208-117	69982 Luis Gabino Terrenos	Cancn Estefanahaven	Hidalgo	19.442016630000001	-99.131399650000006	0101000020E61000002DDD13DA68C858C05D237A0028713340
+04e43341-64c0-4f66-822f-f2c0ef02e6bc	0	Barela e Hijos	https://timoteo.gob.mx	Soledad.Brito7@yahoo.com	500 281 343	8758 Alondra Romina Parcela	Guadalupeside	Tamaulipas	19.441613950000001	-99.133661459999999	0101000020E6100000E1DBCBE88DC858C017B5A09C0D713340
+f73cfbce-60b8-4e2c-9ec7-de8dbb5e0a49	1	Palacios - Montez	https://felipe.org	Rosalia.Estvez@nearbpo.com	590 666 046	7676 Raquel Solar	Marco Antonioton	Michoacan	19.441063410000002	-99.130467699999997	0101000020E6100000CC2B329559C858C089691988E9703340
+edb50561-46f9-4541-9c04-8de82401cc13	4	Pedraza - Nio	http://jos eduardo.gob.mx	Irene_Rojas95@nearbpo.com	537 531 201	207 Chavarra Lado	Franciscohaven	Baja California Norte	19.442683819999999	-99.125024589999995	0101000020E6100000BB4F236700C858C04C5E11BA53713340
+\.
+
+
+--
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: tjbguzmfqysfmi
+--
+
+COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
+\.
+
+
+--
+-- Name: alembic_version alembic_version_pkc; Type: CONSTRAINT; Schema: public; Owner: tjbguzmfqysfmi
+--
+
+ALTER TABLE ONLY public.alembic_version
+    ADD CONSTRAINT alembic_version_pkc PRIMARY KEY (version_num);
+
+
+--
+-- Name: restaurants restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: tjbguzmfqysfmi
+--
+
+ALTER TABLE ONLY public.restaurants
+    ADD CONSTRAINT restaurants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: TABLE spatial_ref_sys; Type: ACL; Schema: public; Owner: tjbguzmfqysfmi
+--
+
+REVOKE ALL ON TABLE public.spatial_ref_sys FROM postgres;
+REVOKE SELECT ON TABLE public.spatial_ref_sys FROM PUBLIC;
+GRANT ALL ON TABLE public.spatial_ref_sys TO tjbguzmfqysfmi;
+GRANT SELECT ON TABLE public.spatial_ref_sys TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
