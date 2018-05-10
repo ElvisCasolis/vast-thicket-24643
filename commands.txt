@@ -1,0 +1,18 @@
+py manage.py db init
+py manage.py db migrate
+py manage.py db upgrade
+py manage.py runserver
+
+
+
+
+
+SQL
+
+
+
+select COUNT(*) as CountInsideOfCircle from restaurants as A where ST_Point_Inside_Circle(a.geom,-99.1270471,19.44005705,0.0001); 
+
+select AVG(rating) as RatingAverage from restaurants as A where ST_Point_Inside_Circle(a.geom,-99.1270471,19.44005705,0.0001);
+
+select stddev_pop(rating) as StandardDeviation from restaurants as A where ST_Point_Inside_Circle(a.geom,-99.1270471,19.44005705,1); 
