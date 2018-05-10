@@ -163,8 +163,8 @@ def statistics():
 	lat1 = request.args['lat']
 	lng1 = request.args['lng']
 	rad1= request.args['rad']
-	conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
-	conn = psycopg2.connect(conn_string)
+	#conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
+	conn = psycopg2.connect(DB_URL, sslmode='require')
 	conn.set_isolation_level('ISOLATION_LEVEL_AUTOCOMMIT')
 	cursor = conn.cursor()
 	register(conn)
