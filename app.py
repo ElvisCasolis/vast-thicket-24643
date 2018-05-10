@@ -19,7 +19,7 @@ host= 'ec2-54-243-137-182.compute-1.amazonaws.com'
 port= '5432'
 
 
-DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=user,pw=pw,url=host,db=db)
+DB_URL = 'postgres://{user}:{pw}@{url}/{db}'.format(user=user,pw=pw,url=host,db=db)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
@@ -163,7 +163,7 @@ def statistics():
 	lat1 = request.args['lat']
 	lng1 = request.args['lng']
 	rad1= request.args['rad']
-	conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
+	#conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
 	conn = psycopg2.connect(DB_URL)
 	conn.set_isolation_level('ISOLATION_LEVEL_AUTOCOMMIT')
 	cursor = conn.cursor()
