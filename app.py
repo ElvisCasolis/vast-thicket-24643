@@ -6,9 +6,10 @@ from flask_marshmallow import Marshmallow
 import psycopg2
 from postgis.psycopg import register
 import json
+import os
 
 app = Flask(__name__)
-
+DATABASE_URL = os.environ['DATABASE_URL']
 
 
 user= 'postgres'
@@ -18,7 +19,10 @@ host= 'localhost'
 port= '5432'
 
 
-DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=user,pw=pw,url=host,db=db)
+#DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=user,pw=pw,url=host,db=db)
+
+
+DB_URL=DATABASE_URL
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
@@ -162,8 +166,9 @@ def statistics():
 	lat1 = request.args['lat']
 	lng1 = request.args['lng']
 	rad1= request.args['rad']
-	conn_string = "host='localhost' dbname='postgres' user='postgres' password='postgres'"
-	conn = psycopg2.connect(conn_string)
+	#conn_string = "host='localhost' dbname='postgres' user='postgres' password='postgres'"
+	#conn = psycopg2.connect(conn_string)
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 	conn.set_isolation_level('ISOLATION_LEVEL_AUTOCOMMIT')
 	cursor = conn.cursor()
 	register(conn)
