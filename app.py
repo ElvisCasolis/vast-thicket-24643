@@ -7,6 +7,7 @@ import psycopg2
 from postgis.psycopg import register
 import json
 import os
+from decimal import Decimal as D
 
 app = Flask(__name__)
 DATABASE_URL = os.environ['DATABASE_URL']
