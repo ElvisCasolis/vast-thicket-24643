@@ -187,7 +187,7 @@ def statistics():
 		results.append(dict(zip(columns,row)))
 
 		df=pd.read_json(DecimalEncoder().encode(results[0]),typ='series')
-	return jsonify(df)
+	return df
 
 
 if __name__ == '__main__':
