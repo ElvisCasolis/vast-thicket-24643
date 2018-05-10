@@ -7,7 +7,6 @@ import psycopg2
 from postgis.psycopg import register
 import json
 import os
-from psycopg2.extras import json, Json
 
 app = Flask(__name__)
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -162,14 +161,6 @@ def restaurante_delete(id):
 # endpoint to get statistics
 @app.route("/restaurants/statistics")
 def statistics():
-
-    class DecimalEncoder(json.JSONEncoder):
-            def default(self, obj):
-                if isinstance(obj, Decimal):
-                    return float(obj)
-                return json.JSONEncoder.default(self, obj)
-
-
 	
 	lat1 = request.args['lat']
 	lng1 = request.args['lng']
@@ -177,26 +168,19 @@ def statistics():
 	#conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
 	conn = psycopg2.connect(DB_URL)
 	conn.set_isolation_level('ISOLATION_LEVEL_AUTOCOMMIT')
-	cursor = self.conn.cursor()
+	cursor = conn.cursor()
 	register(conn)
 
 	query="""SELECT COUNT(*) as Count_Inside_Of_Circle, AVG(rating) as Rating_Average,stddev_pop(rating) as Standard_Deviation  from restaurants as A where ST_Point_Inside_Circle(a.geom,{lg},{lt},{rd});""".format(lt=lat1,lg=lng1,rd=rad1)
 	cursor.execute(query)
 	columns=[column[0] for column in cursor.description]
 
-    obj=Decimal(jsonify(results[0]))
-    def dumps(obj):
-            return json.dumps(obj, cls=DecimalEncoder)
-
-	
-
-
-    results=[]
+	results=[]
 	for row in cursor.fetchall():
 		results.append(dict(zip(columns,row)))
 
 
-	return obj
+	return jsonify(results[0])
 
 
 if __name__ == '__main__':
