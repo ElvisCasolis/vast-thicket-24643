@@ -8,7 +8,7 @@ from postgis.psycopg import register
 import json
 import os
 from decimal import Decimal as D
-import pandas as pd
+
 
 app = Flask(__name__)
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -176,7 +176,7 @@ def statistics():
 	conn = psycopg2.connect(DB_URL)
 	conn.set_isolation_level('ISOLATION_LEVEL_AUTOCOMMIT')
 	cursor = conn.cursor()
-	register(conn)
+	#register(conn)
 
 	query="""SELECT COUNT(*) as Count_Inside_Of_Circle, AVG(rating) as Rating_Average,stddev_pop(rating) as Standard_Deviation  from restaurants as A where ST_Point_Inside_Circle(a.geom,{lg},{lt},{rd});""".format(lt=lat1,lg=lng1,rd=rad1)
 	cursor.execute(query)
@@ -186,8 +186,8 @@ def statistics():
 	for row in cursor.fetchall():
 		results.append(dict(zip(columns,row)))
 
-		df=pd.read_json(DecimalEncoder().encode(results[0]),typ='series')
-	return df
+
+	return jsonify(DecimalEncoder().encode(results[0]))
 
 
 if __name__ == '__main__':
