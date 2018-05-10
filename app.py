@@ -100,6 +100,11 @@ def add_restaurante():
 
     return jsonify(str(new_restaurante))
 
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, D):
+            return float(obj)
+        return json.JSONEncoder.default(self, obj)
 
 
 # endpoint to show all users
@@ -180,7 +185,7 @@ def statistics():
 		results.append(dict(zip(columns,row)))
 
 
-	return jsonify(results[0])
+	return jsonify(DecimalEncoder().encode(results[0]))
 
 
 if __name__ == '__main__':
