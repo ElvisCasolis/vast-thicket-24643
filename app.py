@@ -168,7 +168,7 @@ def restaurante_delete(id):
 # endpoint to get statistics
 @app.route("/restaurants/statistics")
 def statistics():
-	
+
 	user= 'tjbguzmfqysfmi'
 	pw= 'ec212d7962872b24c2ea09897186c914ae20e35c7d0f7c90e61eaecac7a41fb1'
 	db= 'dft06nn603npvn'
@@ -194,7 +194,7 @@ def statistics():
 		results.append(dict(zip(columns,row)))
 
 
-	return jsonify(DecimalEncoder().encode(results[0]))
+	return jsonify(results[0])
 
 
 if __name__ == '__main__':
