@@ -32,45 +32,45 @@ ma = Marshmallow(app)
 
 @app.route("/")
 def main():
-    return 'Hello World !'
+	return 'Hello World !'
 
 
 
 
 class restaurants(db.Model):
 
-    __tablename__ = 'restaurants'
-    id = db.Column(db.Text, primary_key=True)
-    rating = db.Column(db.Integer)
-    name = db.Column(db.Text)
-    site = db.Column(db.Text)
-    email = db.Column(db.Text)
-    phone = db.Column(db.Text)
-    street = db.Column(db.Text)
-    city = db.Column(db.Text)
-    state = db.Column(db.Text)
-    lat = db.Column(db.Float)
-    lng = db.Column(db.Float)
+	__tablename__ = 'restaurants'
+	id = db.Column(db.Text, primary_key=True)
+	rating = db.Column(db.Integer)
+	name = db.Column(db.Text)
+	site = db.Column(db.Text)
+	email = db.Column(db.Text)
+	phone = db.Column(db.Text)
+	street = db.Column(db.Text)
+	city = db.Column(db.Text)
+	state = db.Column(db.Text)
+	lat = db.Column(db.Float)
+	lng = db.Column(db.Float)
 
-    def __init__(self, id, rating,name,site,email,phone,street,city,state,lat,lng):
-        self.id = id
-        self.rating = rating
-        self.name = name
-        self.site = site
-        self.email = email
-        self.phone = phone
-        self.street = street
-        self.city = city
-        self.state = state
-        self.lat = lat
-        self.lng = lng
+	def __init__(self, id, rating,name,site,email,phone,street,city,state,lat,lng):
+		self.id = id
+		self.rating = rating
+		self.name = name
+		self.site = site
+		self.email = email
+		self.phone = phone
+		self.street = street
+		self.city = city
+		self.state = state
+		self.lat = lat
+		self.lng = lng
 
 
 
 class UserSchema(ma.Schema):
-    class Meta:
-        # Fields to expose
-        fields = ('id', 'rating','name','site','email','phone','street','city','state','lat','lng')
+	class Meta:
+		# Fields to expose
+		fields = ('id', 'rating','name','site','email','phone','street','city','state','lat','lng')
 
 
 user_schema = UserSchema()
@@ -81,87 +81,87 @@ users_schema = UserSchema(many=True)
 # endpoint to create new user
 @app.route("/restaurants", methods=["POST"])
 def add_restaurante():
-    id = request.json['id']
-    rating = request.json['rating']
-    name = request.json['name']
-    site = request.json['site']
-    email = request.json['email']
-    phone = request.json['phone']
-    street = request.json['street']
-    city = request.json['city']
-    state = request.json['state']
-    lat = request.json['lat']
-    lng = request.json['lng']
+	id = request.json['id']
+	rating = request.json['rating']
+	name = request.json['name']
+	site = request.json['site']
+	email = request.json['email']
+	phone = request.json['phone']
+	street = request.json['street']
+	city = request.json['city']
+	state = request.json['state']
+	lat = request.json['lat']
+	lng = request.json['lng']
 
-    
-    new_restaurante = restaurants(id,rating,name,site,email,phone,street,city,state,lat,lng)
+	
+	new_restaurante = restaurants(id,rating,name,site,email,phone,street,city,state,lat,lng)
 
-    db.session.add(new_restaurante)
-    db.session.commit()
+	db.session.add(new_restaurante)
+	db.session.commit()
 
-    return jsonify(str(new_restaurante))
+	return jsonify(str(new_restaurante))
 
 class DecimalEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, D):
-            return float(obj)
-        return json.JSONEncoder.default(self, obj)
+	def default(self, obj):
+		if isinstance(obj, D):
+			return float(obj)
+		return json.JSONEncoder.default(self, obj)
 
 
 # endpoint to show all users
 @app.route("/restaurants", methods=["GET"])
 def get_restaurantes():
-    all_restaurantes = restaurants.query.all()
-    result = users_schema.dump(all_restaurantes)
-    return jsonify(result.data)
+	all_restaurantes = restaurants.query.all()
+	result = users_schema.dump(all_restaurantes)
+	return jsonify(result.data)
 
 
 # endpoint to get user detail by id
 @app.route("/restaurants/<id>", methods=["GET"])
 def restaurante_detail(id):
-    restaurante = restaurants.query.get(id)
-    return user_schema.jsonify(restaurante)
+	restaurante = restaurants.query.get(id)
+	return user_schema.jsonify(restaurante)
 
 
 # endpoint to update user
 @app.route("/restaurants/<id>", methods=["PUT"])
 def restaurante_update(id):
-    restaurante = restaurants.query.get(id)
-    rating = request.json['rating']
-    name = request.json['name']
-    site = request.json['site']
-    email = request.json['email']
-    phone = request.json['phone']
-    street = request.json['street']
-    city = request.json['city']
-    state = request.json['state']
-    lat = request.json['lat']
-    lng = request.json['lng']
+	restaurante = restaurants.query.get(id)
+	rating = request.json['rating']
+	name = request.json['name']
+	site = request.json['site']
+	email = request.json['email']
+	phone = request.json['phone']
+	street = request.json['street']
+	city = request.json['city']
+	state = request.json['state']
+	lat = request.json['lat']
+	lng = request.json['lng']
 
-    restaurante.rating = rating
-    restaurante.name = name
-    restaurante.site = site
-    restaurante.email = email
-    restaurante.phone = phone
-    restaurante.street = street
-    restaurante.city = city
-    restaurante.state = state
-    restaurante.lat = lat
-    restaurante.lng = lng
+	restaurante.rating = rating
+	restaurante.name = name
+	restaurante.site = site
+	restaurante.email = email
+	restaurante.phone = phone
+	restaurante.street = street
+	restaurante.city = city
+	restaurante.state = state
+	restaurante.lat = lat
+	restaurante.lng = lng
 
 
-    db.session.commit()
-    return user_schema.jsonify(restaurante)
+	db.session.commit()
+	return user_schema.jsonify(restaurante)
 
 
 # endpoint to delete user
 @app.route("/restaurants/<id>", methods=["DELETE"])
 def restaurante_delete(id):
-    restaurante = restaurants.query.get(id)
-    db.session.delete(restaurante)
-    db.session.commit()
+	restaurante = restaurants.query.get(id)
+	db.session.delete(restaurante)
+	db.session.commit()
 
-    return user_schema.jsonify(restaurante)
+	return user_schema.jsonify(restaurante)
 
 
 # endpoint to get statistics
@@ -185,9 +185,9 @@ def statistics():
 	for row in cursor.fetchall():
 		results.append(dict(zip(columns,row)))
 
-        j=json.dumps(DecimalEncoder().encode(results[0]))
-	return jsonify(j)
+
+	return jsonify(DecimalEncoder().encode(results[0]))
 
 
 if __name__ == '__main__':
-    app.run()
+	app.run()
