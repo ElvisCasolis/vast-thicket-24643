@@ -183,10 +183,10 @@ def statistics():
 
 	results=[]
 	for row in cursor.fetchall():
-		results.append(dict(zip(columns,DecimalEncoder().encode(row))))
+		results.append(dict(zip(DecimalEncoder().encode(columns,(row)))))
 
 
-	return jsonify(results)
+	return jsonify(results[0])
 
 
 if __name__ == '__main__':
