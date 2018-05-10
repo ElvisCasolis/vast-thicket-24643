@@ -168,19 +168,12 @@ def restaurante_delete(id):
 # endpoint to get statistics
 @app.route("/restaurants/statistics")
 def statistics():
-
-	user= 'tjbguzmfqysfmi'
-	pw= 'ec212d7962872b24c2ea09897186c914ae20e35c7d0f7c90e61eaecac7a41fb1'
-	db= 'dft06nn603npvn'
-	host= 'ec2-54-243-137-182.compute-1.amazonaws.com'
-	port= '5432'
-
-
+	
 	lat1 = request.args['lat']
 	lng1 = request.args['lng']
 	rad1= request.args['rad']
-	conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
-	conn = psycopg2.connect(conn_string)
+	#conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
+	conn = psycopg2.connect(DB_URL)
 	conn.set_isolation_level('ISOLATION_LEVEL_AUTOCOMMIT')
 	cursor = conn.cursor()
 	register(conn)
@@ -194,7 +187,7 @@ def statistics():
 		results.append(dict(zip(columns,row)))
 
 
-	return jsonify(results[0])
+	return jsonify(DecimalEncoder().encode(results[0]))
 
 
 if __name__ == '__main__':
