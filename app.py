@@ -163,11 +163,11 @@ def statistics():
 	lat1 = request.args['lat']
 	lng1 = request.args['lng']
 	rad1= request.args['rad']
-	#conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
+	conn_string = "host={h} dbname={db} user={us} password={ps}".format(h=host,db=db,us=user,ps=pw)
 	conn = psycopg2.connect(DB_URL)
 	conn.set_isolation_level('ISOLATION_LEVEL_AUTOCOMMIT')
 	cursor = conn.cursor()
-	#register(conn)
+	register(conn)
 
 	query="""SELECT COUNT(*) as Count_Inside_Of_Circle, AVG(rating) as Rating_Average,stddev_pop(rating) as Standard_Deviation  from restaurants as A where ST_Point_Inside_Circle(a.geom,{lg},{lt},{rd});""".format(lt=lat1,lg=lng1,rd=rad1)
 	cursor.execute(query)
